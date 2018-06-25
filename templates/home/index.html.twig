@@ -2,4 +2,46 @@
 
 {% block title %}Estadísticas WLE Chile{% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+
+  <nav class="level">
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="title">{{ total.dias }}</p>
+        <p class="heading">Días</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="title">{{ total.archivos }}</p>
+        <p class="heading">Fotos</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="title">{{ total.usuarios }}</p>
+        <p class="heading">Participantes</p>
+      </div>
+    </div>
+  </nav>
+
+  <table class="table is-narrow">
+    <thead>
+      <tr>
+        <th>Día</th>
+        <th>Fotos</th>
+        <th>Usuarios</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for foto in fotos %}
+        <tr>
+          <td>{{ foto.fecha | date('d-m-Y')}}</td>
+          <td class="has-text-right">{{ foto.archivos }}</td>
+          <td class="has-text-right">{{ foto.usuarios}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
