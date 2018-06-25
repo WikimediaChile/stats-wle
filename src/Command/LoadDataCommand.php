@@ -35,7 +35,7 @@ class LoadDataCommand extends Command
                'gcmtitle'=> 'Category:Images from Wiki Loves Earth 2018 in Chile', 'gcmtype'=> 'file',
                'gcmlimit'=> 'max', 'gcmsort'=> 'timestamp']);
         $request = Requests::get($url);
-        $data = json_decode($request->body);
-        $this->commons->addPhotos($data->query->pages);
+        $data = json_decode($request->body, true);
+        $this->commons->addPhotos((array)$data['query']['pages']);
     }
 }
