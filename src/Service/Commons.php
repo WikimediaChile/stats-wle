@@ -3,35 +3,44 @@
 namespace App\Service;
 
 use App\Entity\Foto;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\FotoRepository;
 
 class Commons
 {
-    private $entityManager;
+    private $fotoRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /**
+     * Constructor de clase
+     * @param FotoRepository $fotoRepository Repositorio de Fotos
+     */
+    public function __construct(FotoRepository $fotoRepository)
     {
-        $this->entityManager = $entityManager;
+        $this->fotoRepository = $fotoRepository;
     }
 
-    public function addPhotos($list)
+    /**
+     * Añade un arreglo de fotos en el repositorio
+     * @param array $list Listado de fotos a añadir
+     */
+    public function addPhotos(array $list) : void
     {
-        array_map([$this, 'addPhoto'], (array)$list);
+        array_map([$this, 'addPhoto'], $list);
     }
 
-    public function addPhoto($element)
+    /**
+     * Añade una foto en el repositorio
+     * @param array $element Elemento a añadir en el repositorio
+     */
+    public function addPhoto(array $element) : void
     {
-        $element = is_array($element) ? $element : (array)$element;
-        $test = $this->entityManager->getRepository(Foto::class)->findOneBy(['pageid' => $element['pageid']]);
-        if (is_null($test)) {
+        if (is_null($this->fotoRepository->getByPageid($element['pageid']))) {
             $data = (array)$element['imageinfo'][0];
             $foto = new Foto();
             $foto->setTitle($element['title']);
             $foto->setAuthor($data['user']);
             $foto->setTimestamp(\DateTime::createFromFormat("Y-m-d\TH:i:s\Z", $data['timestamp']));
             $foto->setPageid($element['pageid']);
-            $this->entityManager->persist($foto);
-            $this->entityManager->flush();
+            $this->fotoRepository->save($foto);
         }
     }
 }

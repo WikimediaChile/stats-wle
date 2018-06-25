@@ -19,32 +19,23 @@ class FotoRepository extends ServiceEntityRepository
         parent::__construct($registry, Foto::class);
     }
 
-//    /**
-//     * @return Foto[] Returns an array of Foto objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Obtiene una página por su pageid
+     * @param  int    $pageid Número interno de la página en Wikimedia Commons
+     * @return Foto|null
+     */
+    public function getByPageid(int $pageid)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->findOneBy(['pageid' => $pageid]);
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Foto
+    /**
+     * Guarda una foto en el repositorio
+     * @param  Foto   $foto Clase instanciada de foto
+     */
+    public function save(Foto $foto)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $this->_em->persist($foto);
+        $this->_em->flush();
     }
-    */
 }
