@@ -34,12 +34,13 @@ class Commons
     public function addPhoto(array $element) : void
     {
         if (is_null($this->fotoRepository->getByPageid($element['pageid']))) {
-            $data = (array)$element['imageinfo'][0];
             $foto = new Foto();
-            $foto->setTitle($element['title']);
-            $foto->setAuthor($data['user']);
-            $foto->setTimestamp(\DateTime::createFromFormat("Y-m-d\TH:i:s\Z", $data['timestamp']));
+            $foto->setTitle($element['page_title']);
+            $foto->setAuthor($element['username']);
+            $foto->setTimestamp(\DateTime::createFromFormat("Y-m-d\TH:i:s\Z", $element['date']));
             $foto->setPageid($element['pageid']);
+            $foto->setSize((int)$element['size']);
+            $foto->setDimensions($element['resolution']);
             $this->fotoRepository->save($foto);
         }
     }

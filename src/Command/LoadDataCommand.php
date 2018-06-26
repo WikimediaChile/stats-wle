@@ -28,14 +28,9 @@ class LoadDataCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $url = 'https://commons.wikimedia.org/w/api.php?';
-
-        $url .= http_build_query(['action'=> 'query', 'format'=> 'json', 'generator'=> 'categorymembers',
-               'prop'=> 'imageinfo', 'iiprop'=> 'user|timestamp',
-               'gcmtitle'=> 'Category:Images from Wiki Loves Earth 2018 in Chile', 'gcmtype'=> 'file',
-               'gcmlimit'=> 'max', 'gcmsort'=> 'timestamp']);
+        $url = 'https://tools.wmflabs.org/superzerocool/files-wle-2018.json';
         $request = Requests::get($url);
         $data = json_decode($request->body, true);
-        $this->commons->addPhotos((array)$data['query']['pages']);
+        $this->commons->addPhotos($data);
     }
 }

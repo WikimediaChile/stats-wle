@@ -12,13 +12,7 @@ use Doctrine\ORM\Mapping\Index;
 class Foto
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
+     * @ORM\Id
      * @ORM\Column(type="integer")
      */
     private $pageid;
@@ -34,14 +28,19 @@ class Foto
     private $timestamp;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $size;
+
+    /**
+     * @ORM\Column(type="string", length=45)
+     */
+    private $dimensions;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $author;
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     public function getPageid(): ?int
     {
@@ -87,6 +86,30 @@ class Foto
     public function setAuthor(string $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(int $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    public function getDimensions(): ?string
+    {
+        return $this->dimension;
+    }
+
+    public function setDimensions(string $dimensions): self
+    {
+        $this->dimensions = $dimensions;
 
         return $this;
     }
