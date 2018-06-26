@@ -7,7 +7,7 @@ use Twig\TwigFilter;
 
 class SizeFilter extends AbstractExtension
 {
-    const DIM=['', 'kilo', 'mega', 'giga', 'tera'];
+    const DIM=['', 'K', 'M', 'G', 'T'];
 
     public function getFilters()
     {
@@ -21,6 +21,6 @@ class SizeFilter extends AbstractExtension
         for ($i = 0; $number > (pow(1024, $i)); $i++);
         $numero = round($number/(pow(1024, $i-1)), 2);
         $dimension = self::DIM[$i-1];
-        return sprintf('%s %sbytes', $numero, $dimension);
+        return sprintf('%s %sB', $numero, $dimension);
     }
 }
