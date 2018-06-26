@@ -104,7 +104,7 @@ class Foto
 
     public function getDimensions(): ?string
     {
-        return $this->dimension;
+        return $this->dimensions;
     }
 
     public function setDimensions(string $dimensions): self

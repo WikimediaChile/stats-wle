@@ -24,24 +24,49 @@
       </div>
     </div>
   </nav>
-
-  <table class="table is-narrow">
-    <thead>
-      <tr>
-        <th>Día</th>
-        <th>Fotos</th>
-        <th>Usuarios</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for foto in fotos %}
-        <tr>
-          <td>{{ foto.fecha | date('d-m-Y')}}</td>
-          <td class="has-text-right">{{ foto.archivos }}</td>
-          <td class="has-text-right">{{ foto.usuarios}}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
+  <div class="columns">
+    <div class="column">
+      <table class="table is-narrow">
+        <thead>
+          <tr>
+            <th>Día</th>
+            <th>Fotos</th>
+            <th>Usuarios</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for foto in fotos %}
+            <tr>
+              <td>{{ foto.fecha | date('d-m-Y')}}</td>
+              <td class="has-text-right">{{ foto.archivos }}</td>
+              <td class="has-text-right">{{ foto.usuarios}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="column">
+      <table class="table is-narrow">
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Fotos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for archivos, usuario in usuarios %}
+            <tr>
+              <td>
+                {% for usu in usuario %}
+                  <a href="{{ path('user', {'name': usu})  }}">{{ usu }}</a>
+                  -
+                {% endfor %}
+              </td>
+              <td class="has-text-right">{{ archivos }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 {% endblock %}

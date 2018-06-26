@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\FotoRepository;
 
 class Dashboard
 {
@@ -13,9 +14,10 @@ class Dashboard
      * Constructor de clase
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, FotoRepository $fotoRepository)
     {
         $this->entityManager = $entityManager;
+        $this->fotoRepository = $fotoRepository;
     }
 
     /**
@@ -38,6 +40,34 @@ class Dashboard
     }
 
     /**
+     * Obtiene un resumen de usuario y conteo de archivos
+     * @param  boolean $grouped Determina si está agrupado por número de contribuciones
+     * @return array            Si está agrupado, usa un arreglo de orden númerico para
+     * agrupar los usuarios [x, [yyy, yyyy, yyyy]]
+     */
+    public function getUsers(bool $grouped = true) : array
+    {
+        $conn = $this->entityManager->getConnection();
+        $sql = '
+          select author as usuario, count(1) as archivos
+          from foto
+          group by author
+          order by archivos desc';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $data = $stmt->fetchAll();
+        if ($grouped) {
+            $elements = [];
+            foreach ($data as $element) {
+                $elements[$element['archivos']][] = $element['usuario'];
+            }
+            return $elements;
+        }
+        return $data;
+    }
+
+    /**
      * Obtiene un resumen de días y fotos subidas
      * @return array
      */
@@ -53,5 +83,10 @@ class Dashboard
         $stmt->execute();
 
         return $stmt->fetch();
+    }
+
+    public function getUserUpload(string $user) : array
+    {
+        return $this->fotoRepository->findBy(['author' => $user]);
     }
 }

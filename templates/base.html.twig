@@ -11,7 +11,48 @@
     {% block stylesheets %}{% endblock %}
   </head>
   <body>
-    {% block body %}{% endblock %}
+    <section class="hero is-primary">
+      <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="{{ path('home') }}">
+                Wiki Loves Earth 2018 - Chile
+              </a>
+              <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroA" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item" href="/">
+                  Inicio
+                </a>
+                <a class="navbar-item" href="https://wle.cl">
+                  Página del concurso
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            {% block titulo %}Estadísticas generales{% endblock %}
+          </h1>
+          <h2 class="subtitle"></h2>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+
+        {% block body %}{% endblock %}
+      </div>
+    </section>
     {% block javascripts %}{% endblock %}
   </body>
 </html>
