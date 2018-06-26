@@ -1,0 +1,15 @@
+{% extends 'index.html.twig' %}
+
+{% block body %}
+<h1>Error 404 - No encontrado</h1>
+
+<article class="message is-danger">
+  <div class="message-header">
+    <p>Página no encontrada</p>
+  </div>
+  <div class="message-body">
+    No hemos encontrado esta página, por favor, vuelve a <a href="{{ path('home') }}">la página inicial</a> para continuar navegando...
+  </div>
+</article>
+
+{% endblock %}
