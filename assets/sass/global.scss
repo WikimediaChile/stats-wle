@@ -3,21 +3,12 @@
 @import '~bulma/sass/utilities/functions';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 $family-serif: "Open Sans", serif;
-$primary: #A4BCC2;
+$primary: #81A8B8;
 $primary-invert: #fff;
 $danger: $orange;
 $family-primary: $family-serif;
-$card-footer-background-color: #A4BCC2;
+$card-footer-background-color: #E8F3F8;
 $footer-background-color: #C2CBCE;
-.card-footer {
-  a {
-    color: #fff;
-  }
-
-  a:hover {
-    color: #fff;
-  }
-}
 
 dt {
   font-weight: 600;
