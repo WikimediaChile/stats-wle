@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  <article class="message is-danger">
+    <div class="message-header">
+      <p>Error en la página</p>
+    </div>
+    <div class="message-body">
+      Hemos encontrado un error en el software. Por favor, vuelve a
+      <a href="{{ path('home') }}">la página inicial</a>
+      para continuar navegando...
+    </div>
+  </article>
+
+{% endblock %}

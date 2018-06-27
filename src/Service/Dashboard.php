@@ -102,6 +102,12 @@ class Dashboard
      */
     public function getDateUpload(string $date) : array
     {
+      if (preg_match('/\d{4}(-\d{2}){2}/', $date)){
         return $this->fotoRepository->getByDate($date);
+      }
+      else{
+        throw new \Exception("Error en la fecha ingresada", 1);
+      }
+
     }
 }

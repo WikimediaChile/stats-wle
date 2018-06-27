@@ -32,7 +32,7 @@ class HomeController extends Controller
     }
 
     /**
-     * @Route("/day/{date}", name="day")
+     * @Route("/day/{date}", name="day", requirements={"date" = "\d{4}(-\d{2}){2}"})
      */
     public function day(Dashboard $dashboard, string $date)
     {
