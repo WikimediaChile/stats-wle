@@ -29,6 +29,16 @@ class FotoRepository extends ServiceEntityRepository
         return $this->findOneBy(['pageid' => $pageid]);
     }
 
+
+    public function getByDate(string $date)
+    {
+        $dateTime = \DateTime::createFromFormat("Y-m-d", $date);
+        $query = $this->_em->createQuery("SELECT f FROM App\Entity\Foto f WHERE f.timestamp between :dateStart and :dateEnd");
+        $query->setParameter('dateStart', $dateTime->format('Y-m-d 00:00:00'));
+        $query->setParameter('dateEnd', $dateTime->format('Y-m-d 23:59:59'));
+        return $query->execute();
+    }
+
     /**
      * Guarda una foto en el repositorio
      * @param  Foto   $foto Clase instanciada de foto

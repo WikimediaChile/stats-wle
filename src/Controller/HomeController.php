@@ -30,4 +30,13 @@ class HomeController extends Controller
         $data = ['name' => $name, 'photos' => $dashboard->getUserUpload($name)];
         return $this->render('home/user.html.twig', $data);
     }
+
+    /**
+     * @Route("/day/{date}", name="day")
+     */
+    public function day(Dashboard $dashboard, string $date)
+    {
+        $data = ['date' => $date, 'photos' => $dashboard->getDateUpload($date)];
+        return $this->render('home/date.html.twig', $data);
+    }
 }

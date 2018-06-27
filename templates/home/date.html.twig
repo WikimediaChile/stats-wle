@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ name }} | Wiki Loves Earth Chile 2018{% endblock %}
+{% block title %}{{ date | date('d-m-Y') }} | Wiki Loves Earth Chile 2018{% endblock %}
 
-{% block titulo %}Galería de {{ name }}{% endblock %}
+{% block titulo %}Galería diaria {{ date | date('d-m-Y') }}{% endblock %}
 
 {% block body %}
 
@@ -20,6 +20,8 @@
           <div class="card-content">
             <div class="content">
               <dl>
+                <dt>Usuario</dt>
+                <dd>{{ photo.author }}</dd>
                 <dt>Fecha subida</dt>
                 <dd>{{ photo.timestamp | date('d-m-Y H:i:s') }} (UTC)</dd>
                 <dt>Tamaño</dt>

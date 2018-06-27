@@ -37,7 +37,7 @@
         <tbody>
           {% for foto in fotos %}
             <tr>
-              <td>{{ foto.fecha | date('d-m-Y')}}</td>
+              <td><a href="{{ path('day', {'date': foto.fecha }) }}">{{ foto.fecha | date('d-m-Y')}}</a></td>
               <td class="has-text-right">{{ foto.archivos }}</td>
               <td class="has-text-right">{{ foto.usuarios}}</td>
             </tr>

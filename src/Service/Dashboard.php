@@ -85,8 +85,23 @@ class Dashboard
         return $stmt->fetch();
     }
 
+    /**
+     * Obtiene las imágenes subidas por un usuario
+     * @param  string $user Nombre del usuario
+     * @return array        arreglo
+     */
     public function getUserUpload(string $user) : array
     {
         return $this->fotoRepository->findBy(['author' => $user]);
+    }
+
+    /**
+     * Obtiene las imágenes subidas en una fecha determinada
+     * @param  string $date Fecha de subida
+     * @return array        arreglo
+     */
+    public function getDateUpload(string $date) : array
+    {
+        return $this->fotoRepository->getByDate($date);
     }
 }
