@@ -88,6 +88,14 @@ class DashBoardTest extends WebTestCase
       $this->assertInstanceOf('App\Entity\Foto', $foto, 'Retorno de fila es Entidad Foto');
     }
 
+    public function testVeterans(){
+      $veterans = $this->dashboard->getVeterans();
+      $this->assertInternalType('array', $veterans, 'Arreglo es un resumen de veteranos');
+      $this->assertArrayHasKey('nuevos', $veterans, 'Fila posee la columna nuevos');
+      $this->assertArrayHasKey('viejos', $veterans, 'Fila posee la columna viejos');
+      $this->assertArrayHasKey('tbd', $veterans, 'Fila posee la columna tbd');
+    }
+
     public function tearDown(){
       $this->dashboard = null;
     }

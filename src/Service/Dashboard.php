@@ -4,6 +4,7 @@ namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\FotoRepository;
+use App\Repository\UsersCommonsRepository;
 
 class Dashboard
 {
@@ -13,11 +14,14 @@ class Dashboard
     /**
      * Constructor de clase
      * @param EntityManagerInterface $entityManager
+     * @param FotoRepository $entityManager
+     * @param UsersCommonsRepository
      */
-    public function __construct(EntityManagerInterface $entityManager, FotoRepository $fotoRepository)
+    public function __construct(EntityManagerInterface $entityManager, FotoRepository $fotoRepository, UsersCommonsRepository $userRepository)
     {
         $this->entityManager = $entityManager;
         $this->fotoRepository = $fotoRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -110,4 +114,22 @@ class Dashboard
       }
 
     }
+
+    /**
+     * Obtiene la cantidad de usuarios nuevos, viejso y veteranos hay en el concurso
+     * @return array
+     */
+    public function getVeterans() : array {
+      $conn = $this->entityManager->getConnection();
+      $sql = '
+        select count((case when is_new = 1 then 1 end)) nuevos,
+          count((case when is_new = 0 then 1 end)) viejos,
+          count((case when is_new is null then 1 end)) tbd
+        from users_commons';
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+
+      return $stmt->fetch();
+    }
+
 }

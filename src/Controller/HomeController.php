@@ -16,7 +16,8 @@ class HomeController extends Controller
         $data = [
         'fotos' => $dashboard->getPhotos(),
         'usuarios' => $dashboard->getUsers(),
-        'total' => $dashboard->getResume()
+        'total' => $dashboard->getResume(),
+        'edad' => $dashboard->getVeterans()
       ];
 
         return $this->render('home/index.html.twig', $data);
