@@ -40,6 +40,16 @@ class FotoRepository extends ServiceEntityRepository
     }
 
     /**
+     * Obtiene los usuarios ya almacenados en la base de datos
+     * @return array 
+     */
+    public function getUsers(): array {
+      $query = $this->_em->createQuery("SELECT f.author from App\Entity\Foto f");
+      $data = $query->execute();
+      return array_unique(array_map(function($el) { return $el['author']; }, $data));
+    }
+
+    /**
      * Guarda una foto en el repositorio
      * @param  Foto   $foto Clase instanciada de foto
      */

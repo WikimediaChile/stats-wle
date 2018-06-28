@@ -44,4 +44,13 @@ class Commons
             $this->fotoRepository->save($foto);
         }
     }
+
+    /**
+     * Obtiene a todos los usuarios desde el repositorio
+     * @return array Arreglo con todos los usuarios
+     */
+    public function getUsers(): array
+    {
+      return $this->fotoRepository->getUsers();
+    }
 }

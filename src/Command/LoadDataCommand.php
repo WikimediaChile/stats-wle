@@ -23,7 +23,7 @@ class LoadDataCommand extends Command
         $this
           ->setName('app:load-data')
           ->setDescription('Retrieve external data from Commons')
-          ->setHelp('This command retrieves the inmages from Category in Wikimedia Commons');
+          ->setHelp('This command retrieves the images from Category in Wikimedia Commons');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
