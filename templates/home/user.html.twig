@@ -25,7 +25,7 @@
                 <dt>Tamaño</dt>
                 <dd>{{ photo.size | bytes }}</dd>
                 <dt>Resolución</dt>
-                <dd>{{ photo.dimensions }} ({{ photo.dimensions | pixeles }})</dd>
+                <dd>{{ photo.dimensions }} ({{ photo.megapixels | round(2, 'ceil') }} Mpx)</dd>
               </dl>
             </div>
           </div>

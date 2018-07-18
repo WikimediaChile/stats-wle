@@ -42,6 +42,11 @@ class Foto
      */
     private $author;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $megapixels;
+
     public function getPageid(): ?int
     {
         return $this->pageid;
@@ -110,6 +115,18 @@ class Foto
     public function setDimensions(string $dimensions): self
     {
         $this->dimensions = $dimensions;
+
+        return $this;
+    }
+
+    public function getMegapixels(): ?float
+    {
+        return $this->megapixels/1e6;
+    }
+
+    public function setMegapixels(?int $megapixels): self
+    {
+        $this->megapixels = $megapixels;
 
         return $this;
     }
